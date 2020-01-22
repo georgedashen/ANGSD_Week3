@@ -1,0 +1,19 @@
+---
+title: "HW-Week3"
+author: "Zhuoyang Chen"
+date: "January 22, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# first title
+## second title
+### third title
+```{r}
+```
+
+custom output in r like `r x`
+
