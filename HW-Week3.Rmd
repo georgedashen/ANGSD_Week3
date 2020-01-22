@@ -9,9 +9,29 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# first title
-## second title
-### third title
+# Questions
+##1. A somatic human cell contains about 6 picograms of DNA. How much DNA does a sperm cell contain?
+3 picogram. A sperm is a progenitor of human (halpoid) so just contains half of the chromosomes (6/2 pg).
+
+##2. How many human cells with you need to obtain 10 micrograms of DNA, as is requested by many sequencing protocols?
+1666667. As in question 1 saying that a human somatic cell contain 6 picograms of DNA, we have to provide 10e6 / 6 = 1666666.7 cells.
+
+##3. Describe one typical cause for DNA loss during DNA extraction.
+That could be DNA still remains on the solid absorber whthin the column after buffer washing.
+
+##4. Describe two functions of the adapters that are typically added during Illumina's library preparations. Which types of sequences do they often entails?
+
+## 5. Components of what kind of lab equipment have to be integrated in any type of Illumina sequencer?
+
+#Exercises
+##1. Write a for-loop to download all fastq files of WT biological replicate NO. 2 of the Gierlinski data set. Try to have a solution as generally applicable as possible.
+
+##2. Why are there multiple fastq files per sample? What does each file represent?
+
+##3. Count the number of reads stored in each FASTQ file and keep a note of the results. The zcat command allows you to see the contents of a gzipped file.
+
+#Project
+##1. Identify and write down one or two biological or technical questions of interest for your project.
 ```{r}
 ```
 
