@@ -20,6 +20,11 @@ knitr::opts_chunk$set(echo = TRUE)
 That could be DNA still remains on the solid absorber whthin the column after buffer washing.
 
 ##4. Describe two functions of the adapters that are typically added during Illumina's library preparations. Which types of sequences do they often entails?
+1. Necessary for template DNA to be immobilized on the lane whthin a sequencer and then initializes the first round of sequencing (a pcr step before bridge pcr).
+
+2. Necessary for the newly synthesized complemetary DNA to fold over into a bridge-like shape to initialize bridge pcr.
+
+They often have a) P5 and P7, which are necessary for template DNA to bind and initializing bridge pcr, b) adapter trimming sequence, which would be used to ensure unidirection sequencing, and convenient for data preprocessing and quality control, c) indices and primers for indices, and d) primers for insertional DNA sequencing.
 
 ## 5. Components of what kind of lab equipment have to be integrated in any type of Illumina sequencer?
 
