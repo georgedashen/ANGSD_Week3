@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 3 picogram. A sperm is a progenitor of human (halpoid) so just contains half of the chromosomes (6/2 pg).
 
 ###2. How many human cells with you need to obtain 10 micrograms of DNA, as is requested by many sequencing protocols?
-Nedd 1666667 cells. As in question 1 saying that a human somatic cell contain 6 picograms of DNA, we have to provide 10e6 / 6 = 1666666.7 cells.
+Need 1666667 cells. As in question 1 saying that a human somatic cell contain 6 picograms of DNA, we have to provide 10e6 / 6 = 1666666.7 cells.
 
 ###3. Describe one typical cause for DNA loss during DNA extraction.
 That could be DNA still remains on the solid absorber whthin the column after buffer washing.
@@ -41,35 +41,32 @@ a. Login server and create new directory
 `mkdir HW3`  
 `cd HW3`  
 
-b. Download summary TEXT for tracking urls
-`wget --content-disposition "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB5348&result=read_run&fields=study_accession,sample_accession,experiment_accession,run_accession,tax_id,scientific_name,fastq_ftp,submitted_ftp,sra_ftp&format=tsv&download=true"` #--content-disposition added to bypass response to the website when downloading
+b. Download summary TEXT for tracking urls. The file name is **PRJEB5348.txt**  
+`wget --content-disposition "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB5348&result=read_run&fields=study_accession,sample_accession,experiment_accession,run_accession,tax_id,scientific_name,fastq_ftp,submitted_ftp,sra_ftp&format=tsv&download=true"` 
+--content-disposition added to bypass response to the website when downloading
 
-c. Download mapping information for selecting the right samples  
-`wget`  
+c. Download mapping information for selecting the right samples and rename the file as **mapping.tsv**
+`wget -c https://ndownloader.figshare.com/files/2194841 -O mapping.tsv`  
 
-d. Use regular expression to select the sample names and store them into a new file
+d. Use regular expression to select the sample names and store them into a new file called **WT_no2.txt**  
 `egrep '.*WT.*[[:space:]]2$' mapping.tsv | grep -o 'ERR[0-9]* > WT_no2.txt`  
 
-e. Select all the **.fastq.qz** files in the summary TEXT for convenience  
-`egrep -o 'ftp.*\.fastq\.gz' $filename > address.txt'`  
+e. Select all the **.fastq.qz** files in the summary TEXT for convenience and store them in to file **address.txt**  
+`egrep -o 'ftp.*\.fastq\.gz' PRJEB5348.txt > address.txt'`  
 
-f. Select right urls  
-`for name in ${file};`  
-`do egrep "${name}" address.txt;`  
+f. Extract right urls and download fastq files  
+`samples=$(cat WT_no2.txt)`  
+`for name in ${samples};`  
+`do url=$(egrep "${name}" address.txt);`  
+`wget ${url};`  
 `done`  
-
-g. Download right fastq files  
-`wget`  
 
 ###2. Why are there multiple fastq files per sample? What does each file represent?
 They are technical replicates instead of biological replicates, and each file represent a single running process in a sequencing machine. Those replicates can be used for strict quality control.
 
 
 ###3. Count the number of reads stored in each FASTQ file and keep a note of the results. The zcat command allows you to see the contents of a gzipped file.
-
-#########
-zcat involve
-#########
+`zcat ERR458878.fastq.gz | egrep '^@ERR[0-9].*\.' | wc -l`
 
 ##Project
 ###1. Identify and write down one or two biological or technical questions of interest for your project.
