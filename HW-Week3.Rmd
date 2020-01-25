@@ -31,6 +31,15 @@ c) indices and primers for indices
 d) primers for insertional DNA sequencing
 
 ### 5. Components of what kind of lab equipment have to be integrated in any type of Illumina sequencer?
+a. agarose gel
+I think it is included for determine the initial concentration (or amount) of the DNA samples by electrophoresis to check if the samples are enough for sequencing.
+
+b. centrifuge
+Better included for vortex of samples.
+
+c. microscope
+Not sure but may be needed for better detection in base calling process.
+
 
 ##Exercises
 ###1. Write a for-loop to download all fastq files of WT biological replicate No. 2 of the Gierlinski data set. Try to have a solution as generally applicable as possible.
@@ -66,9 +75,32 @@ They are technical replicates instead of biological replicates, and each file re
 
 
 ###3. Count the number of reads stored in each FASTQ file and keep a note of the results. The zcat command allows you to see the contents of a gzipped file.
-`zcat ERR458878.fastq.gz | egrep '^@ERR[0-9].*\.' | wc -l`
+a. Create a bash script file **extract_readcount.sh** to extract number of reads in each file
+
+```{}
+samples=$(cat WT_no2.txt)
+
+for name in ${samples}
+do
+length=$(zcat ${name}.fastq.gz | wc -l)
+echo $((${length}/4))
+done
+```
+
+b. Then run the script file and store the results in file **readcount_result.txt**  
+`sh extract_readcount.sh > readout_result.txt`  
+
+c. Paste the readcounts with their corresponding file names and store into a new file **samples_readcount.txt**  
+`paste WT_no2.txt readcount_result.txt > samples_readcount.txt`  
+
+d. The content of **samples_readcount.txt** looks like this:  
+
+![Figure 1. fastq files and their read counts](samples_readcount.jpg)
 
 ##Project
 ###1. Identify and write down one or two biological or technical questions of interest for your project.
+How many ratio of cases in cancer are caused by or contain gene fusion? This could be focus on only one database for one or more kinds of cancer, or just one kind of cancer but across different databases.
+
+
 
 
